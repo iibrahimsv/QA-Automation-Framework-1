@@ -2,6 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,16 +16,23 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
-    @Test(priority = 1, dataProvider = "invalidCredentials", dataProviderClass = BaseTest.class)
-    public void LoginValidEmailValidPasswordTest (String email, String password) {
+    @Test (enabled=true, priority = 1)// (priority = 1, dataProvider = "invalidCredentials", dataProviderClass = BaseTest.class)
+    public void LoginValidEmailValidPasswordTest () {
 
-        provideEmail(email); // "demo@class.com"
-        providePassword(password); // te$t$tudent
-        clickSubmitBtn();
+        logIn();
+        // driver.findelement(how to find the element)
+        // |
+        // var = how to find element
+        // driver.findelement(var)
 
-        WebElement avatarIcon = driver.findElement(By.xpath("//img[contains(@alt,'Avatar of')]"));
+        By avatarIconLocator = By.xpath("//img[contains(@alt,'Avatar of')]");
+        By playlistLocator = By.cssSelector("#playlists h1");
+
+        wait.until(ExpectedConditions.elementToBeClickable(avatarIconLocator));
+        WebElement avatarIcon = driver.findElement(avatarIconLocator);
         Assert.assertTrue(avatarIcon.isDisplayed());
-
+        wait.until(ExpectedConditions.elementToBeClickable(playlistLocator));
+        wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(playlistLocator), "PLAYLISTS"));
     }
 
     @Test(enabled = false, priority = 2)
