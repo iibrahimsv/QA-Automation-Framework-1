@@ -5,13 +5,12 @@
 
     <test name="Smoke Test" preserve-order="false">
         <classes>
-            <class name="LoginTests">
+            <class name="AddingSongToPlaylistTest">
                 <methods>
-                    <include name="LoginValidEmailValidPasswordTest" />
+                    <include name="addSongToPlaylist"/>
                 </methods>
             </class>
         </classes>
     </test>
-
 </suite>
 
